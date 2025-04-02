@@ -1,9 +1,8 @@
 # Example Source: https://python.langchain.com/v0.2/docs/integrations/memory/google_firestore/
 
-from dotenv import load_dotenv
 from google.cloud import firestore
 from langchain_google_firestore import FirestoreChatMessageHistory
-from langchain_openai import ChatOpenAI
+from langchain_ollama import OllamaLLM
 
 """
 Steps to replicate this example:
@@ -20,7 +19,6 @@ Steps to replicate this example:
     - https://console.cloud.google.com/apis/enableflow?apiid=firestore.googleapis.com&project=crewai-automation
 """
 
-load_dotenv()
 
 # Setup Firebase Firestore
 PROJECT_ID = "langchain-demo-abf48"

@@ -1,14 +1,12 @@
-from dotenv import load_dotenv
 from langchain import hub
 from langchain.agents import (
     AgentExecutor,
     create_react_agent,
 )
 from langchain_core.tools import Tool
-from langchain_openai import ChatOpenAI
+from langchain_ollama import OllamaLLM
 
 # Load environment variables from .env file
-load_dotenv()
 
 
 # Define a very simple tool function that returns the current time

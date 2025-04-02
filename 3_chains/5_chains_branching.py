@@ -1,15 +1,12 @@
-from dotenv import load_dotenv
 from langchain.prompts import ChatPromptTemplate
 from langchain.schema.output_parser import StrOutputParser
 from langchain.schema.runnable import RunnableBranch
-from langchain_openai import ChatOpenAI
+from langchain_ollama import OllamaLLM
 
 # Load environment variables from .env
-load_dotenv()
 
 # Create a ChatOpenAI model
-model = ChatOpenAI(model="gpt-4o")
-
+model = OllamaLLM(model="mistral")
 # Define prompt templates for different feedback types
 positive_feedback_template = ChatPromptTemplate.from_messages(
     [
@@ -56,7 +53,7 @@ classification_template = ChatPromptTemplate.from_messages(
     ]
 )
 
-# Define the runnable branches for handling feedback
+# Define the runnable branches for handling feedback`
 branches = RunnableBranch(
     (
         lambda x: "positive" in x,
@@ -85,7 +82,7 @@ chain = classification_chain | branches
 # Neutral review - "The product is okay. It works as expected but nothing exceptional."
 # Default - "I'm not sure about the product yet. Can you tell me more about its features and benefits?"
 
-review = "The product is terrible. It broke after just one use and the quality is very poor."
+review = "I love this new product, it's incredible and fulfill all my needs."
 result = chain.invoke({"feedback": review})
 
 # Output the result

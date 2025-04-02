@@ -1,13 +1,10 @@
-from dotenv import load_dotenv
-from langchain_openai import ChatOpenAI
+from langchain_ollama import OllamaLLM
 from langchain.schema import AIMessage, HumanMessage, SystemMessage
 
 # Load environment variables from .env
-load_dotenv()
 
 # Create a ChatOpenAI model
-model = ChatOpenAI(model="gpt-4o")
-
+model = OllamaLLM(model="mistral")
 
 chat_history = []  # Use a list to store messages
 
@@ -24,10 +21,10 @@ while True:
 
     # Get AI response using history
     result = model.invoke(chat_history)
-    response = result.content
-    chat_history.append(AIMessage(content=response))  # Add AI message
+    
+    chat_history.append(AIMessage(content=result))  # Add AI message
 
-    print(f"AI: {response}")
+    print(f"AI: {result}")
 
 
 print("---- Message History ----")

@@ -1,14 +1,13 @@
-from dotenv import load_dotenv
 from langchain.prompts import ChatPromptTemplate
 from langchain.schema.output_parser import StrOutputParser
 from langchain.schema.runnable import RunnableParallel, RunnableLambda
-from langchain_openai import ChatOpenAI
+from langchain_ollama import OllamaLLM
 
 # Load environment variables from .env
-load_dotenv()
 
 # Create a ChatOpenAI model
-model = ChatOpenAI(model="gpt-4o")
+model = OllamaLLM(model="tinyllama")
+model2 = OllamaLLM(model="tinyllama")
 
 # Define prompt template
 prompt_template = ChatPromptTemplate.from_messages(
@@ -58,7 +57,7 @@ pros_branch_chain = (
 )
 
 cons_branch_chain = (
-    RunnableLambda(lambda x: analyze_cons(x)) | model | StrOutputParser()
+    RunnableLambda(lambda x: analyze_cons(x)) | model2 | StrOutputParser()
 )
 
 # Create the combined chain using LangChain Expression Language (LCEL)
@@ -71,7 +70,11 @@ chain = (
 )
 
 # Run the chain
-result = chain.invoke({"product_name": "MacBook Pro"})
+import time
+start_time = time.time()
+
+result = chain.invoke({"product_name": "Macbook Air"})
 
 # Output
 print(result)
+print("--- %s seconds ---" % (time.time() - start_time))

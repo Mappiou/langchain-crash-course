@@ -1,27 +1,29 @@
 import os
 
 from langchain_community.vectorstores import Chroma
-from langchain_openai import OpenAIEmbeddings
 
 # Define the persistent directory
 current_dir = os.path.dirname(os.path.abspath(__file__))
 persistent_directory = os.path.join(current_dir, "db", "chroma_db")
 
 # Define the embedding model
-embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
-
+from langchain_community.embeddings.ollama import OllamaEmbeddings
+from langchain_ollama import OllamaEmbeddings
+embeddings = OllamaEmbeddings(model="nomic-embed-text")
 # Load the existing vector store with the embedding function
 db = Chroma(persist_directory=persistent_directory,
             embedding_function=embeddings)
 
 # Define the user's question
-query = "Who is Odysseus' wife?"
+query = "what is the release date of frankestein?"
 
 # Retrieve relevant documents based on the query
 retriever = db.as_retriever(
-    search_type="similarity_score_threshold",
-    search_kwargs={"k": 3, "score_threshold": 0.9},
+    search_type="similarity",
+    search_kwargs={"k": 3},
 )
+
+
 relevant_docs = retriever.invoke(query)
 
 # Display the relevant results with metadata

@@ -1,6 +1,5 @@
 import os
 
-from dotenv import load_dotenv
 from langchain import hub
 from langchain.agents import AgentExecutor, create_react_agent
 from langchain.chains import create_history_aware_retriever, create_retrieval_chain
@@ -12,7 +11,6 @@ from langchain_core.tools import Tool
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 
 # Load environment variables from .env file
-load_dotenv()
 
 # Load the existing Chroma vector store
 current_dir = os.path.dirname(os.path.abspath(__file__))

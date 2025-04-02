@@ -3,7 +3,7 @@ import os
 from langchain.text_splitter import CharacterTextSplitter
 from langchain_community.document_loaders import TextLoader
 from langchain_community.vectorstores import Chroma
-from langchain_openai import OpenAIEmbeddings
+from langchain_community.embeddings.ollama import OllamaEmbeddings
 
 # Define the directory containing the text file and the persistent directory
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -35,9 +35,11 @@ if not os.path.exists(persistent_directory):
 
     # Create embeddings
     print("\n--- Creating embeddings ---")
-    embeddings = OpenAIEmbeddings(
-        model="text-embedding-3-small"
-    )  # Update to a valid embedding model if needed
+
+
+
+    embeddings = OllamaEmbeddings(model="nomic-embed-text")
+     # Update to a valid embedding model if needed
     print("\n--- Finished creating embeddings ---")
 
     # Create the vector store and persist it automatically

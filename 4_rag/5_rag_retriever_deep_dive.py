@@ -1,10 +1,8 @@
 import os
 
-from dotenv import load_dotenv
 from langchain_community.vectorstores import Chroma
 from langchain_openai import OpenAIEmbeddings
 
-load_dotenv()
 
 # Define the persistent directory
 current_dir = os.path.dirname(os.path.abspath(__file__))

@@ -4,15 +4,13 @@
 import os
 from typing import Type
 
-from dotenv import load_dotenv
 from langchain import hub
 from langchain.agents import AgentExecutor, create_tool_calling_agent
 from langchain.pydantic_v1 import BaseModel, Field
 from langchain_core.tools import BaseTool
-from langchain_openai import ChatOpenAI
+from langchain_ollama import OllamaLLM
 
 
-load_dotenv()
 
 # Pydantic models for tool arguments
 

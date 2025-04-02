@@ -1,12 +1,10 @@
 import os
 
-from dotenv import load_dotenv
 from langchain_community.vectorstores import Chroma
 from langchain_core.messages import HumanMessage, SystemMessage
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 
 # Load environment variables from .env
-load_dotenv()
 
 # Define the persistent directory
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -45,8 +43,7 @@ combined_input = (
 )
 
 # Create a ChatOpenAI model
-model = ChatOpenAI(model="gpt-4o")
-
+model = OllamaLLM(model="mistral")
 # Define the messages for the model
 messages = [
     SystemMessage(content="You are a helpful assistant."),
@@ -61,4 +58,4 @@ print("\n--- Generated Response ---")
 # print("Full result:")
 # print(result)
 print("Content only:")
-print(result.content)
+print(result)
